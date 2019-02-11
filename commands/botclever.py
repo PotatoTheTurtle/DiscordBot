@@ -9,7 +9,7 @@ def setup(client: commands.Bot):
 
 class Clever(object):
     def __init__(self, client: commands.Bot):
-        self.clever = CleverWrap()
+        self.clever = CleverWrap("CC8sl6pv19pwWpQhE1wk-1edDPw")
         self.client = client
         client.clever_response = self.clever_response
 
