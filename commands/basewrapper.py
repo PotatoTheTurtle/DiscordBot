@@ -1,5 +1,6 @@
 from datetime import datetime
 
+#TODO Create global data json
 
 class Base(object):
     def info_logger(self, message):
