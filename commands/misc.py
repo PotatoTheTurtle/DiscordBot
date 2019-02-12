@@ -8,7 +8,7 @@ class Misc(object):
 
     @commands.command(pass_context=True)
     async def ping(self, ctx: commands.Context):
-        basewrapper.Base().info_logger(f"{self.client.user.id} - Ping!")
+        basewrapper.Base().info_logger(f"{ctx.message.author} - Ping!")
         await self.client.say(f"{ctx.message.author.mention} Pong!")
 
 
