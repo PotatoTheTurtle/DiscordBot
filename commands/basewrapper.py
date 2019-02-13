@@ -1,6 +1,5 @@
 from datetime import datetime
-
-#TODO Create global data json
+import json
 
 class Base(object):
     def info_logger(self, message):
@@ -11,3 +10,19 @@ class Base(object):
 
     def warning_logger(self, message):
         print(f"[{datetime.today()} - *WARNING*] {message}")
+
+    def jsondata(self, author, playlistlink):
+        data = {f"{author}": {"name": f"{author}", "playlist_link": f"{playlistlink}"}}
+        return data
+
+class Json(object):
+    def json_load(self, json_file, char):
+        jsonfile = open(json_file, char)
+        jl = json.load(jsonfile)
+        jsonfile.close()
+        return jl
+
+    def json_write(self, json_file, char, data_list):
+        jsonfile = open(json_file, char)
+        jsonfile.write(json.dumps(data_list, indent=4, sort_keys=True))
+        jsonfile.close()
