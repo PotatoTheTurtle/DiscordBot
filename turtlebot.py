@@ -16,7 +16,10 @@ client.listcogs = [
 
 @client.event
 async def on_message(message):
-    if message.content.startswith(f"<@{client.user.id}>") and message.author != client.user:
+    if message.author == client.user:
+        return
+
+    if message.content.startswith(f"<@{client.user.id}>"):
         basewrapper.Base().info_logger(message.content)
         results = await client.clever_response(message.content[22:])
         await client.send_message(message.channel, f"{message.author.mention} {results}")
