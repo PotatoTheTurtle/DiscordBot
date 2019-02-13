@@ -3,7 +3,6 @@ from commands import basewrapper
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import json
-import random
 
 JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
 #JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
@@ -66,21 +65,18 @@ class Spotify(object):
     async def rngplaylist(self, ctx: commands.Context, *, msg: str):
         """
         :return Get random song from users set playlist (Spotify)
+        TODO FIX RANDOM - RANDOM IN BASE WRAPPER
         """
         jl = basewrapper.Json().json_load(JSON_FILE, "r")
 
-        playlist_link = None
-
         for data in jl:
-            if data[msg]["name"] == msg:
-                playlist_link = data[msg]["playlist_link"]
-            else:
+            if data[msg]["name"] != msg:
                 await self.client.say(f"{ctx.message.author.mention} No playlist was found!")
                 return
 
         author = str(ctx.message.author)
-        random_song = random.choice(self.spotify_playlist_content(author))
-        await self.client.say(f"{ctx.message.author.mention} Random song from {msg}: {random_song}")
+        await self.client.say(f"{ctx.message.author.mention} Random song from {msg}: "
+                              f"{basewrapper.Base().randomizer(self.spotify_playlist_content(author))}")
 
 
     @commands.command(pass_context=True)

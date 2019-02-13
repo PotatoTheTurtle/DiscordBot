@@ -1,4 +1,5 @@
 from datetime import datetime
+import random
 import json
 
 class Base(object):
@@ -14,6 +15,15 @@ class Base(object):
     def jsondata(self, author, playlistlink):
         data = {f"{author}": {"name": f"{author}", "playlist_link": f"{playlistlink}"}}
         return data
+
+    def randomizer(self, array):
+        array_length = len(array)
+        rand = random.randint(0, array_length)
+        counter = 0
+        for data in array:
+            if rand == counter:
+                return data
+            counter += 1
 
 class Json(object):
     def json_load(self, json_file, char):
