@@ -3,6 +3,7 @@ from commands import basewrapper
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import json
+import random
 
 JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
 #JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
@@ -15,14 +16,23 @@ class Spotify(object):
     def __init__(self, client: commands.Bot):
         self.client = client
 
-    def spotify_playlist_content(self):
+    def spotify_playlist_content(self, name):
         client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         user = 'spotify'
-
-        playlists = sp.user_playlist_tracks(user, playlist_id=playlist_link)
+        playlist_id = self.get_playlist_id(name, JSON_FILE, "r")
+        playlists = sp.user_playlist_tracks(user, playlist_id=playlist_id)
+        songs = []
         for song in playlists["tracks"]["items"]:
-            print(song["track"]["name"])
+            songs.append(song["track"]["name"])
+            return songs
+
+    def get_playlist_id(self, name, jsonfile, char):
+        jl = basewrapper.Json().json_load(jsonfile, char)
+        for data in jl:
+            if data[name]["name"] == name:
+                playlist = data[name]["playlist_link"]
+                return playlist
 
     @commands.command(pass_context=True)
     async def setplaylist(self, ctx: commands.Context, *, msg: str):
@@ -31,22 +41,24 @@ class Spotify(object):
         :param msg: playlist ID
         :return: write playlist_id to json
         """
-        data = {f"{ctx.message.author}": {"name": f"{ctx.message.author}", "playlist_link": f"{msg}"}}
-        jsonfile = open(JSON_FILE, "r")
-        jl = json.load(jsonfile)
-        jsonfile.close()
+
+        data = basewrapper.Base().jsondata(ctx.message.author, msg)
+        jl = basewrapper.Json().json_load(JSON_FILE, "r")
 
         for j in jl:
             author = str(ctx.message.author)
             if j[author]["name"] == author:
+                print("xxy")
                 basewrapper.Base().warning_logger(f"User data already exists: {j}")
                 j[author]["playlist_link"] = msg
-            else:
-                jl.append(data)
+                basewrapper.Base().info_logger(f"{self.client.user.id} - Playlist set!")
+                await self.client.say(f"{ctx.message.author.mention} Playlist set!")
+                return
 
-        jsonfile = open(JSON_FILE, "w+")
-        jsonfile.write(json.dumps(jl))
-        jsonfile.close()
+        jl.append(data)
+
+        print(jl)
+        basewrapper.Json().json_write(JSON_FILE, "w+", jl)
         basewrapper.Base().info_logger(f"{self.client.user.id} - Playlist set!")
         await self.client.say(f"{ctx.message.author.mention} Playlist set!")
 
@@ -55,9 +67,7 @@ class Spotify(object):
         """
         :return Get random song from users set playlist (Spotify)
         """
-        jsonfile = open(JSON_FILE, "r")
-        jl = json.load(jsonfile)
-        jsonfile.close()
+        jl = basewrapper.Json().json_load(JSON_FILE, "r")
 
         playlist_link = None
 
@@ -68,25 +78,25 @@ class Spotify(object):
                 await self.client.say(f"{ctx.message.author.mention} No playlist was found!")
                 return
 
-        self.spotify_playlist_content()
+        author = str(ctx.message.author)
+        random_song = random.choice(self.spotify_playlist_content(author))
+        await self.client.say(f"{ctx.message.author.mention} Random song from {msg}: {random_song}")
+
 
     @commands.command(pass_context=True)
     async def playlist(self, ctx: commands.Context, *, msg: str):
-        jsonfile = open(JSON_FILE, "r")
-        jl = json.load(jsonfile)
-        jsonfile.close()
-
+        jl = basewrapper.Json().json_load(JSON_FILE, "r")
         for data in jl:
             if data[msg]["name"] == msg:
                 playlist = data[msg]["playlist_link"]
-                await self.client.say(f"{ctx.message.author.mention} Playlist: {playlist}")
+                await self.client.say(f"{ctx.message.author.mention} Playlist id: {playlist}")
                 return
         await self.client.say(f"{ctx.message.author.mention} No playlist was found!")
 
 
     @commands.command(pass_context=True)
     async def reset(self, ctx: commands.Context):
-        with open(JSON_FILE, 'wb') as fp:
+        with open(JSON_FILE, 'w') as fp:
             data = []
             json.dump(data, fp)
 
