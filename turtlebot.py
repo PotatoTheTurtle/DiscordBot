@@ -5,7 +5,7 @@ from commands import basewrapper
 
 
 TOKEN = 'NTQwMzAwMjY0OTg5NTIzOTgx.Dz4nzw.nTHGB0hTuDPFPp0TOvejtCK3J28'
-client = commands.Bot(command_prefix="!")
+client = commands.Bot(command_prefix="-")
 
 client.listcogs = [
     "commands.botclever",
