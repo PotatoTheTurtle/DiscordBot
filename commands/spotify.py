@@ -3,9 +3,10 @@ from commands import basewrapper
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import json
+import random
 
-JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
-#JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
+#JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
+JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
 client_secret = "4bd50f140f3349cfac0ef875ab10718e"
 client_id = "fb551e5fad8f4f8ab9c838fa552d9a70"
 
@@ -24,7 +25,7 @@ class Spotify(object):
         songs = []
         for song in playlists["tracks"]["items"]:
             songs.append(song["track"]["name"])
-            return songs
+        return songs
 
     def get_playlist_id(self, name, jsonfile, char):
         jl = basewrapper.Json().json_load(jsonfile, char)
@@ -36,9 +37,7 @@ class Spotify(object):
     @commands.command(pass_context=True)
     async def setplaylist(self, ctx: commands.Context, *, msg: str):
         """
-        Writes playlist ID to playlist.json
-        :param msg: playlist ID
-        :return: write playlist_id to json
+            Set your playlist ID
         """
 
         data = basewrapper.Base().jsondata(ctx.message.author, msg)
@@ -47,7 +46,6 @@ class Spotify(object):
         for j in jl:
             author = str(ctx.message.author)
             if j[author]["name"] == author:
-                print("xxy")
                 basewrapper.Base().warning_logger(f"User data already exists: {j}")
                 j[author]["playlist_link"] = msg
                 basewrapper.Base().info_logger(f"{self.client.user.id} - Playlist set!")
@@ -64,8 +62,7 @@ class Spotify(object):
     @commands.command(pass_context=True)
     async def rngplaylist(self, ctx: commands.Context, *, msg: str):
         """
-        :return Get random song from users set playlist (Spotify)
-        TODO FIX RANDOM - RANDOM IN BASE WRAPPER
+            Get a random song from your playlist
         """
         jl = basewrapper.Json().json_load(JSON_FILE, "r")
 
@@ -76,11 +73,14 @@ class Spotify(object):
 
         author = str(ctx.message.author)
         await self.client.say(f"{ctx.message.author.mention} Random song from {msg}: "
-                              f"{basewrapper.Base().randomizer(self.spotify_playlist_content(author))}")
+                              f"{random.choice(self.spotify_playlist_content(author))}")
 
 
     @commands.command(pass_context=True)
     async def playlist(self, ctx: commands.Context, *, msg: str):
+        """
+            Print playlist ID
+        """
         jl = basewrapper.Json().json_load(JSON_FILE, "r")
         for data in jl:
             if data[msg]["name"] == msg:
