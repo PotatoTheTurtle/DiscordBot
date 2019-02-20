@@ -21,7 +21,7 @@ class Reddit(object):
             if post.url.__contains__(".png" or ".jpg"):
                 reddit_posts.append(post.url)
 
-        print(reddit_posts)
+        basewrapper.Base().info_logger(f"Get Reddit post: {subreddit}")
         await self.client.say(f"{ctx.message.author.mention} Random post from r/{subreddit}: {random.choice(reddit_posts)}")
 
 
