@@ -10,7 +10,8 @@ client = commands.Bot(command_prefix="-")
 client.listcogs = [
     "commands.botclever",
     "commands.misc",
-    "commands.spotify"
+    "commands.spotify",
+    "commands.reddit"
 ]
 
 
