@@ -5,8 +5,8 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import json
 import random
 
-#JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
-JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
+JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
+#JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
 client_secret = "4bd50f140f3349cfac0ef875ab10718e"
 client_id = "fb551e5fad8f4f8ab9c838fa552d9a70"
 
@@ -16,16 +16,26 @@ class Spotify(object):
     def __init__(self, client: commands.Bot):
         self.client = client
 
-    def spotify_playlist_content(self, name):
+    def spotify_playlists(self, name):
         client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
         user = 'spotify'
         playlist_id = self.get_playlist_id(name, JSON_FILE, "r")
         playlists = sp.user_playlist_tracks(user, playlist_id=playlist_id)
-        songs = []
+        return playlists
+
+    def spotify_playlist_random_song(self, name):
+        playlists = self.spotify_playlists(name)
+
+        songs = {}
         for song in playlists["tracks"]["items"]:
-            songs.append(song["track"]["name"])
-        return songs
+            try:
+                songs[song["track"]["name"]] = song["track"]["external_urls"]["spotify"]
+            except KeyError:
+                print("Looks like custom song aka empty url: %s" % song["track"])
+
+        random_song, random_url = random.choice(list(songs.items()))
+        return random_song, random_url
 
     def get_playlist_id(self, name, jsonfile, char):
         jl = basewrapper.Json().json_load(jsonfile, char)
@@ -72,8 +82,9 @@ class Spotify(object):
                 return
 
         author = str(ctx.message.author)
-        await self.client.say(f"{ctx.message.author.mention} Random song from {msg}: "
-                              f"{random.choice(self.spotify_playlist_content(author))}")
+        song, url = self.spotify_playlist_random_song(author)
+        await self.client.say(f"{ctx.message.author.mention} Random song from {msg}: {song}\n"
+                              f"{url}")
 
 
     @commands.command(pass_context=True)
