@@ -13,9 +13,13 @@ class Misc(object):
 
     @commands.command(pass_context=True)
     async def clear(self, ctx: commands.Context, *, number):
-        number = int(number)  # Converting the amount of messages to delete to an integer
+        number = int(number) + 1  # Converting the amount of messages to delete to an integer
+        await self.client.say(f":exclamation:  Clearing {number - 1} messsages.")
         counter = 0
         async for x in self.client.logs_from(ctx.message.channel, limit=number):
+            print(x.author)
+            if x.author == "TurtleBot#9616":
+                continue
             if counter < number:
                 await self.client.delete_message(x)
                 counter += 1

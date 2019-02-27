@@ -20,6 +20,9 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    #if message.content.startswith(f"-convo"):
+            #results = await client.
+
     if message.content.startswith(f"<@{client.user.id}>"):
         basewrapper.Base().info_logger(message.content)
         results = await client.clever_response(message.content[22:])

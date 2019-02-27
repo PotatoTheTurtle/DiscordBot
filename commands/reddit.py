@@ -4,10 +4,10 @@ import random
 from commands import basewrapper
 
 
-class Reddit(object):
+class Memes(object):
     def __init__(self, client: commands.Bot):
         self.client = client
-        self.reddit = praw.Reddit(client_id='BAGbQmlllg3abA',
+        self.c_reddit = praw.Reddit(client_id='BAGbQmlllg3abA',
                              client_secret='wl8mQD6zrevyqzb6pabGOPyXSDE',
                              password='ivan123.',
                              user_agent='discord bot by PotatoTurtle#1337',
@@ -15,9 +15,9 @@ class Reddit(object):
 
 
     @commands.command(pass_context=True)
-    async def meme(self, ctx: commands.Context, *, subreddit: str):
+    async def reddit(self, ctx: commands.Context, *, subreddit: str):
         reddit_posts = []
-        for post in self.reddit.subreddit(subreddit).hot(limit=45):
+        for post in self.c_reddit.subreddit(subreddit).hot(limit=45):
             if post.url.__contains__(".png" or ".jpg"):
                 reddit_posts.append(post.url)
 
@@ -26,4 +26,4 @@ class Reddit(object):
 
 
 def setup(client: commands.Bot):
-    client.add_cog(Reddit(client))
+    client.add_cog(Memes(client))
