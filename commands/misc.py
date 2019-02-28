@@ -1,5 +1,6 @@
 from discord.ext import commands
 from commands import basewrapper
+import time
 
 
 class Misc(object):
@@ -13,16 +14,17 @@ class Misc(object):
 
     @commands.command(pass_context=True)
     async def clear(self, ctx: commands.Context, *, number):
-        number = int(number) + 1  # Converting the amount of messages to delete to an integer
-        await self.client.say(f":exclamation:  Clearing {number - 1} messsages.")
+        number = int(number) + 1 # Converting the amount of messages to delete to an integer
         counter = 0
         async for x in self.client.logs_from(ctx.message.channel, limit=number):
-            print(x.author)
-            if x.author == "TurtleBot#9616":
-                continue
-            if counter < number:
-                await self.client.delete_message(x)
-                counter += 1
+            await self.client.delete_message(x)
+            counter += 1
+
+        msg = await self.client.say(f"{number -1} messages removed.")
+        time.sleep(2.3)
+        await self.client.delete_message(msg)
+        basewrapper.Base().info_logger(f"Cleared {number - 1} messages")
+
 
 
 def setup(client: commands.Bot):
