@@ -23,6 +23,14 @@ async def on_message(message):
     #if message.content.startswith(f"-convo"):
             #results = await client.
 
+    if "fuck" in message.content.lower():
+        """
+            Idea by Nickishero
+        """
+        await client.send_message(message.channel, f"{message.author.mention} This is a christian server!")
+        return
+
+
     if message.content.startswith(f"<@{client.user.id}>"):
         basewrapper.Base().info_logger(message.content)
         results = await client.clever_response(message.content[22:])
@@ -32,6 +40,9 @@ async def on_message(message):
 
     await client.process_commands(message)
 
+@client.event
+async def on_server_join():
+    return
 
 @client.event
 async def on_ready():

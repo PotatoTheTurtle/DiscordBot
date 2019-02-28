@@ -14,22 +14,27 @@ class Misc(object):
 
     @commands.command(pass_context=True)
     async def clear(self, ctx: commands.Context, *, number):
-        number = int(number) + 2  # Converting the amount of messages to delete to an integer
+        number = int(number) + 1  # Converting the amount of messages to delete to an integer
         messages = []
         async for x in self.client.logs_from(ctx.message.channel, limit=number):
             messages.append(x)
 
-        loading = await self.client.say(f"<a:loadring:550693379567255552> Deleting {number - 2} messages.")
+        loading = await self.client.say(f"<a:loadring:550693379567255552> Deleting {number - 1} messages.")
 
         for x in messages:
             await self.client.delete_message(x)
 
         await self.client.delete_message(loading)
 
-        msg = await self.client.say(f":white_check_mark: {number -2} messages removed.")
+        msg = await self.client.say(f":white_check_mark: {number -1} messages removed.")
         time.sleep(2.3)
         await self.client.delete_message(msg)
-        basewrapper.Base().info_logger(f"Cleared {number - 2} messages")
+        basewrapper.Base().info_logger(f"Cleared {number - 1} messages")
+
+    @commands.command(pass_context=True)
+    @commands.has_role("root")
+    async def setrole(self, ctx: commands.Context, name, role):
+        await self.client.add_roles(name, role)
 
 
 
