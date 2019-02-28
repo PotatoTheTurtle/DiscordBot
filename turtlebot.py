@@ -4,7 +4,7 @@ from commands.botclever import Clever
 from commands import basewrapper
 
 
-TOKEN = 'NTQwMzAwMjY0OTg5NTIzOTgx.Dz4nzw.nTHGB0hTuDPFPp0TOvejtCK3J28'
+TOKEN = basewrapper.Base().get_token("DISCORD", "TOKEN")
 client = commands.Bot(command_prefix="-")
 
 client.listcogs = [

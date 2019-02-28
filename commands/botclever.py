@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from cleverwrap import CleverWrap
 import requests
+from commands import basewrapper
 
 
 def setup(client: commands.Bot):
@@ -10,7 +11,7 @@ def setup(client: commands.Bot):
 
 class Clever(object):
     def __init__(self, client: commands.Bot):
-        self.clever = CleverWrap("CC8sl6pv19pwWpQhE1wk-1edDPw")
+        self.clever = CleverWrap(basewrapper.Base().get_token("CLEVER", "clever"))
         self.client = client
         client.clever_response = self.clever_response
 

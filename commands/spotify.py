@@ -5,10 +5,10 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import json
 import random
 
-JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
-#JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
-client_secret = "4bd50f140f3349cfac0ef875ab10718e"
-client_id = "fb551e5fad8f4f8ab9c838fa552d9a70"
+#JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
+JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
+client_secret = basewrapper.Base().get_token("SPOTIFY", "client_secret")
+client_id = basewrapper.Base().get_token("SPOTIFY", "client_id")
 
 
 
