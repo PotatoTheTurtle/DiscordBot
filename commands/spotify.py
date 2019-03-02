@@ -93,6 +93,7 @@ class Spotify(object):
         """
             Print playlist ID
         """
+        print(JSON_FILE)
         jl = basewrapper.Json().json_load(JSON_FILE, "r")
         for data in jl:
             if data[msg]["name"] == msg:
