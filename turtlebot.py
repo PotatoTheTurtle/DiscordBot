@@ -5,9 +5,10 @@ from commands import basewrapper
 from boto.s3.connection import S3Connection
 import os
 
-TOKEN_VAR = S3Connection(os.environ['TOKEN'])
+TOKEN_VAR = os.environ.get('TOKEN')
 
 #TOKEN = basewrapper.Base().get_token("DISCORD", "TOKEN")
+print(TOKEN_VAR)
 TOKEN = TOKEN_VAR
 client = commands.Bot(command_prefix="-")
 
