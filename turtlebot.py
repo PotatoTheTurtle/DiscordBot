@@ -2,9 +2,13 @@ import discord
 from discord.ext import commands
 from commands.botclever import Clever
 from commands import basewrapper
+from boto.s3.connection import S3Connection
+import os
 
+TOKEN_VAR = S3Connection(os.environ['TOKEN'])
 
-TOKEN = basewrapper.Base().get_token("DISCORD", "TOKEN")
+#TOKEN = basewrapper.Base().get_token("DISCORD", "TOKEN")
+TOKEN = TOKEN_VAR
 client = commands.Bot(command_prefix="-")
 
 client.listcogs = [

@@ -4,7 +4,6 @@ from cleverwrap import CleverWrap
 import requests
 from commands import basewrapper
 
-
 def setup(client: commands.Bot):
     client.add_cog(Clever(client))
 
