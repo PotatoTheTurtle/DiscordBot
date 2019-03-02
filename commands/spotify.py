@@ -5,8 +5,6 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import json
 import random
 
-#JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
-#JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
 JSON_FILE = basewrapper.Base().get_config_vars("JSON_FILE")
 client_secret = basewrapper.Base().get_config_vars("S_C_SECRET")
 client_id = basewrapper.Base().get_config_vars("S_C_ID")
@@ -93,7 +91,6 @@ class Spotify(object):
         """
             Print playlist ID
         """
-        print(JSON_FILE)
         jl = basewrapper.Json().json_load(JSON_FILE, "r")
         for data in jl:
             if data[msg]["name"] == msg:
