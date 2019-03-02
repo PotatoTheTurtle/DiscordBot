@@ -7,11 +7,11 @@ from commands import basewrapper
 class Memes(object):
     def __init__(self, client: commands.Bot):
         self.client = client
-        self.c_reddit = praw.Reddit(client_id=basewrapper.Base().get_token("REDDIT", "client_id"),
-                             client_secret=basewrapper.Base().get_token("REDDIT", "client_secret"),
-                             password=basewrapper.Base().get_token("REDDIT", "password"),
-                             user_agent=basewrapper.Base().get_token("REDDIT", "user_agent"),
-                             username=basewrapper.Base().get_token("REDDIT", "username"))
+        self.c_reddit = praw.Reddit(client_id=basewrapper.Base().get_config_vars("R_C_ID"),
+                             client_secret=basewrapper.Base().get_config_vars("R_C_S"),
+                             password=basewrapper.Base().get_config_vars("R_PASSWORD"),
+                             user_agent=basewrapper.Base().get_config_vars("R_USERAGENT"),
+                             username=basewrapper.Base().get_config_vars("R_USERNAME"))
 
 
     @commands.command(pass_context=True)

@@ -2,6 +2,7 @@ from datetime import datetime
 import random
 import json
 import configparser
+import os
 
 #CFG_PATH = r"C:\Users\turbiv\PycharmProjects\DiscordBot\cfg\config.ini"
 #CFG_PATH = r"D:\__GIT\DiscordBot\cfg\config.ini"
@@ -25,6 +26,10 @@ class Base(object):
         config = configparser.ConfigParser()
         config.read(CFG_PATH)
         return config[title][token]
+
+    def get_config_vars(self, var):
+        token = os.environ.get(var)
+        return token
 
 class Json(object):
     def json_load(self, json_file, char):

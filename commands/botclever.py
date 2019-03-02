@@ -10,7 +10,7 @@ def setup(client: commands.Bot):
 
 class Clever(object):
     def __init__(self, client: commands.Bot):
-        self.clever = CleverWrap(basewrapper.Base().get_token("CLEVER", "clever"))
+        self.clever = CleverWrap(basewrapper.Base().get_config_vars("CLEVER"))
         self.client = client
         client.clever_response = self.clever_response
 

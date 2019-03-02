@@ -8,8 +8,8 @@ import random
 #JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
 #JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
 JSON_FILE = r"/app/data/playlist.json"
-client_secret = basewrapper.Base().get_token("SPOTIFY", "client_secret")
-client_id = basewrapper.Base().get_token("SPOTIFY", "client_id")
+client_secret = basewrapper.Base().get_config_vars("S_C_SECRET")
+client_id = basewrapper.Base().get_config_vars("S_C_ID")
 
 
 
