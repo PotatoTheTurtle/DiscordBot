@@ -7,7 +7,7 @@ import random
 
 #JSON_FILE = r"D:\__GIT\DiscordBot\data\playlist.json"
 #JSON_FILE = "C:\\Users\\turbiv\\PycharmProjects\\DiscordBot\\data\\playlist.json"
-JSON_FILE = r"/app/data/playlist.json"
+JSON_FILE = basewrapper.Base().get_config_vars("JOSN_FILE")
 client_secret = basewrapper.Base().get_config_vars("S_C_SECRET")
 client_id = basewrapper.Base().get_config_vars("S_C_ID")
 
