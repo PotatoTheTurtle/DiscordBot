@@ -3,8 +3,9 @@ import random
 import json
 import configparser
 
-CFG_PATH = r"C:\Users\turbiv\PycharmProjects\DiscordBot\cfg\config.ini"
-CFG_PATH = r"D:\__GIT\DiscordBot\cfg\config.ini"
+#CFG_PATH = r"C:\Users\turbiv\PycharmProjects\DiscordBot\cfg\config.ini"
+#CFG_PATH = r"D:\__GIT\DiscordBot\cfg\config.ini"
+CFG_PATH = r"app/cfg/config.ini"
 
 class Base(object):
     def info_logger(self, message):
