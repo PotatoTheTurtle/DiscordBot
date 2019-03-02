@@ -1,5 +1,5 @@
 # DiscordBot
-TurtleBot py
+Run TurtleBot.py, insert your tokens in config.ini or use env.
 
 Dependencies: 
 
