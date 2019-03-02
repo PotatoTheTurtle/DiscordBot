@@ -33,8 +33,13 @@ class Misc(object):
 
     @commands.command(pass_context=True)
     @commands.has_role("root")
-    async def setrole(self, ctx: commands.Context, name, role):
+    async def setrole(self, ctx: commands.Context, name, role: str):
         await self.client.add_roles(name, role)
+
+    @commands.command(pass_context=True)
+    async def poll(self, ctx: commands.Context, name, amount: int):
+
+        return
 
 
 

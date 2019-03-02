@@ -1,0 +1,5 @@
+spotipy==2.4.4
+praw==6.1.1
+discord.py==0.16.12
+cleverwrap==0.2.3.6
+discord==0.16.12
