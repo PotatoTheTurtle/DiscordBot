@@ -63,7 +63,6 @@ class Spotify(object):
 
         jl.append(data)
 
-        print(jl)
         basewrapper.Json().json_write(JSON_FILE, "w+", jl)
         basewrapper.Base().info_logger(f"{self.client.user.id} - Playlist set!")
         await self.client.say(f"{ctx.message.author.mention} Playlist set!")
