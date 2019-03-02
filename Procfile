@@ -1,1 +1,1 @@
-worker: python turtlebot.py
+worker: python3 turtlebot.py
