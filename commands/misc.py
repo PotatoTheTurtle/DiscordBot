@@ -19,14 +19,12 @@ class Misc(object):
         async for x in self.client.logs_from(ctx.message.channel, limit=number):
             messages.append(x)
 
-        loading = await self.client.say(f"<a:loadring:550693379567255552> Deleting {number - 1} messages.")
+        msg = await self.client.say(f"<a:loadring:550693379567255552> Deleting {number - 1} messages.")
 
         for x in messages:
             await self.client.delete_message(x)
 
-        await self.client.delete_message(loading)
-
-        msg = await self.client.say(f":white_check_mark: {number -1} messages removed.")
+        await self.client.edit_message(msg, f":white_check_mark: {number -1} messages removed.")
         time.sleep(2.3)
         await self.client.delete_message(msg)
         basewrapper.Base().info_logger(f"Cleared {number - 1} messages")
