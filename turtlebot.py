@@ -33,7 +33,7 @@ async def on_message(message):
         return
 
     if r"https://discord.gg/" in message.content.lower():
-        client.delete_message(message)
+        await client.delete_message(message)
         await client.send_message(message.channel, f"{message.author.mention} No advertizing other discord servers! (If you belive this message is an error, then contact PotatoTurtle#1337)")
         return
 
