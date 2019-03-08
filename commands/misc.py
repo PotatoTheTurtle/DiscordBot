@@ -51,7 +51,7 @@ class Misc(object):
             steamid = r.json()["converted"]["steamid"]
 
             basewrapper.Base().info_logger(f"Searched for {name} steamid: {steam_id}")
-            await self.client.say(f"{ctx.message.author.mention} SteamID for {name}: {steamid}")
+            await self.client.say(f"{ctx.message.author.mention} SteamID for {name}: `{steamid}`")
 
         except Exception as e:
             await self.client.say(f"{ctx.message.author.mention} No account found!")
