@@ -43,7 +43,7 @@ class Misc(object):
 
             #Get steam id through community ID obtained above
 
-            url = r"https://api.steamid.uk/request.php?"
+            url = r"https://api.steamid.uk/request.php"
             steam_id = basewrapper.Base().get_config_vars("steamid")
             payload = {"api": steam_id, "input": steam_comunity_id, "format": "json"}
 
