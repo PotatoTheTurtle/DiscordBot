@@ -1,6 +1,7 @@
 from discord.ext import commands
 from commands import basewrapper
 import time
+import requests
 
 
 class Misc(object):
@@ -28,6 +29,33 @@ class Misc(object):
         time.sleep(2.3)
         await self.client.delete_message(msg)
         basewrapper.Base().info_logger(f"Cleared {number - 1} messages")
+
+    @commands.command(pass_context=True)
+    async def steamid(self, ctx: commands.Context, *, name):
+        try:
+            steam_api = basewrapper.Base().get_config_vars("steamapi")
+            url = r"http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/"
+            payload = {"key": steam_api, "vanityurl": name}
+
+            r = requests.get(url, params=payload)
+            steam_comunity_id = r.content["response"]["steamid"]
+            basewrapper.Base().info_logger(steam_comunity_id)
+
+            #Get steam id through community ID obtained above
+
+            url = r"https://api.steamid.uk/request.php?"
+            steam_id = basewrapper.Base().get_config_vars("steamid")
+            payload = {"api": steam_id, "player": steam_comunity_id, "request_type": 3, "format": "json"}
+
+            r = requests.get(url, params=payload)
+            steamid = r.content["profile"]["steamid"]
+
+            basewrapper.Base().info_logger(f"Searched for {name} steamid: {steam_id}")
+            await self.client.say(f"{ctx.message.author.mention} SteamID for {name}: {steamid}")
+
+        except Exception as e:
+            await self.client.say(f"{ctx.message.author.mention} No account found!")
+            basewrapper.Base().info_logger(f"Error found, possibly no account found:  {e}")
 
     @commands.command(pass_context=True)
     @commands.has_role("root")
