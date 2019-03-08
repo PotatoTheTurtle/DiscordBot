@@ -1,8 +1,7 @@
 from discord.ext import commands
 from commands import basewrapper
-import time
+import asyncio
 import requests
-import json
 
 class Misc(object):
     def __init__(self, client: commands.Bot):
@@ -50,7 +49,7 @@ class Misc(object):
             await self.client.delete_message(x)
 
         await self.client.edit_message(msg, f":white_check_mark: {number -1} messages removed.")
-        time.sleep(2.3)
+        asyncio.sleep(2.3)
         await self.client.delete_message(msg)
         basewrapper.Base().info_logger(f"Cleared {number - 1} messages")
 
