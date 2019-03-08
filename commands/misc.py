@@ -38,7 +38,7 @@ class Misc(object):
             payload = {"key": steam_api, "vanityurl": name}
 
             r = requests.get(url, params=payload)
-            steam_comunity_id = r.json()
+            steam_comunity_id = r.json()["response"]["steamid"]
             basewrapper.Base().info_logger(steam_comunity_id)
 
             #Get steam id through community ID obtained above
@@ -48,7 +48,7 @@ class Misc(object):
             payload = {"api": steam_id, "player": steam_comunity_id, "request_type": 3, "format": "json"}
 
             r = requests.get(url, params=payload)
-            steamid = r.json()
+            steamid = r.json()["profile"]["steamid"]
 
             basewrapper.Base().info_logger(f"Searched for {name} steamid: {steam_id}")
             await self.client.say(f"{ctx.message.author.mention} SteamID for {name}: {steamid}")
