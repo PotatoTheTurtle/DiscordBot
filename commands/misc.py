@@ -25,6 +25,7 @@ class Misc(object):
         r = requests.get(url, params=payload)
         steam_comunity_id = r.json()["response"]["steamid"]
         basewrapper.Base().info_logger(steam_comunity_id)
+        return steam_comunity_id
 
     def value_converter_decorator(self, value, true, false):
         if value == 0:
