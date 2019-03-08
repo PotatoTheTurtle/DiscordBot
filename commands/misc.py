@@ -44,21 +44,12 @@ class Misc(object):
 
         print(steam_comunity_id)
 
-        url = r"https://api.steamid.uk/convert.php"
+        url = r"https://api.steamid.uk/request.php"
         steam_id = basewrapper.Base().get_config_vars("steamid")
-        payload = {"api": steam_id, "player": steam_comunity_id, "format": "json"}
+        payload = {"api": steam_id, "player": steam_comunity_id, "request": 36, "format": "json"}
 
         r = requests.get(url, params=payload)
         print(r.content)
-        steamid = r.json()["converted"]["steamid64"]
-
-        #new code
-
-        url = r"https://api.steamid.uk/request.php"
-        steam_id = basewrapper.Base().get_config_vars("steamid")
-        payload = {"api": steam_id, "player": steamid, "request": 36, "format": "json"}
-
-        r = requests.get(url, params=payload)
         steamdata = r.json()["profile"]["steamid"]
 
         basewrapper.Base().info_logger(f"Searched for {name} steamid: {steamdata}")
