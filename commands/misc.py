@@ -53,11 +53,11 @@ class Misc(object):
         steamdata = r.json()
 
         basewrapper.Base().info_logger(f"Searched for {name} steamid: {steamdata}")
-        await self.client.say(f"```{ctx.message.author.mention} Steam info for {name}: \n"
-                              f"Steam playername:            {steamdata['profile']['playername']} \n"
+        await self.client.say(f"{ctx.message.author.mention} Steam info for {name}: \n"
+                              f"```Steam playername: {steamdata['profile']['playername']} \n"
                               f"Steam Profile detailed info: {steamdata['profile']['steamidurl']} \n"
-                              f"SteamID:                     {steamdata['profile']['steamid']} \n"
-                              f"SteamID3:                    {steamdata['profile']['steam3']} \n"
+                              f"SteamID: {steamdata['profile']['steamid']} \n"
+                              f"SteamID3: {steamdata['profile']['steam3']} \n"
                               f"Bans - Vac {steamdata['profile_status']['vac']} - Trade {steamdata['profile_status']['tradeban']} - Community Ban {steamdata['profile_status']['communityban']}```")
         """
         except Exception as e:
