@@ -49,6 +49,7 @@ class Misc(object):
         payload = {"api": steam_id, "player": steam_comunity_id, "format": "json"}
 
         r = requests.get(url, params=payload)
+        print(r.content)
         steamid = r.json()["converted"]["steamid64"]
 
         #new code
