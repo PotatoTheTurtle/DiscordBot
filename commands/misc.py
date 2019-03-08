@@ -45,7 +45,7 @@ class Misc(object):
 
             url = r"https://api.steamid.uk/request.php?"
             steam_id = basewrapper.Base().get_config_vars("steamid")
-            payload = {"api": steam_id, "input": "76561198071272922", "format": "json"}
+            payload = {"api": steam_id, "input": steam_comunity_id, "format": "json"}
 
             r = requests.get(url, params=payload)
             steamid = r.json()["converted"]["steamid"]
