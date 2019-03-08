@@ -52,7 +52,7 @@ class Misc(object):
             r = requests.get(url, params=payload)
             steamdata = r.json()
 
-            basewrapper.Base().info_logger(f"Searched for {name} steamid: {steamdata}")
+            basewrapper.Base().info_logger(f"Searched for {name} steam info.")
             await self.client.say(f"{ctx.message.author.mention} Steam info for {name}: \n"
                                   f"```Steam playername: {steamdata['profile']['playername']} \n"
                                   f"Steam Profile detailed: {steamdata['profile']['steamidurl']} \n"
