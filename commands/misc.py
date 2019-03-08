@@ -31,7 +31,7 @@ class Misc(object):
         basewrapper.Base().info_logger(f"Cleared {number - 1} messages")
 
     @commands.command(pass_context=True)
-    async def steamid(self, ctx: commands.Context, *, name):
+    async def steam(self, ctx: commands.Context, *, name):
         steam_api = basewrapper.Base().get_config_vars("steamapi")
         url = r"http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/"
         payload = {"key": steam_api, "vanityurl": name}
@@ -50,10 +50,15 @@ class Misc(object):
 
         r = requests.get(url, params=payload)
         print(r.content)
-        steamdata = r.json()["profile"]["steamid"]
+        steamdata = r.json()
 
         basewrapper.Base().info_logger(f"Searched for {name} steamid: {steamdata}")
-        await self.client.say(f"{ctx.message.author.mention} SteamID for {name}: `{steamdata}`")
+        await self.client.say(f"```{ctx.message.author.mention} Steam info for {name}: \n"
+                              f"Steam playername:            {steamdata['profile']['playername']} \n"
+                              f"Steam Profile detailed info: {steamdata['profile']['steamidurl']} \n"
+                              f"SteamID:                     {steamdata['profile']['steamid']} \n"
+                              f"SteamID3:                    {steamdata['profile']['steam3']} \n"
+                              f"Bans - Vac {steamdata['profile_status']['vac']} - Trade {steamdata['profile_status']['tradeban']} - Community Ban {steamdata['profile_status']['communityban']}```")
         """
         except Exception as e:
             await self.client.say(f"{ctx.message.author.mention} No account found!")
