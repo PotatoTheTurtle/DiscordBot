@@ -98,14 +98,5 @@ class Spotify(object):
                 return
         await self.client.say(f"{ctx.message.author.mention} No playlist was found!")
 
-
-    @commands.command(pass_context=True)
-    async def reset(self, ctx: commands.Context):
-        with open(JSON_FILE, 'w') as fp:
-            data = []
-            json.dump(data, fp)
-
-        await self.client.say(f"{ctx.message.author.mention} Empty!")
-
 def setup(client: commands.Bot):
     client.add_cog(Spotify(client))
