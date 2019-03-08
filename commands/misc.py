@@ -52,6 +52,7 @@ class Misc(object):
         payload = {"api": steam_id, "player": "76561198071272922", "request_type": 3, "format": "json"}
 
         r = requests.get(url, params=payload)
+        print(r.content)
         steamid = r.json()["profile"]["steamid"]
 
         basewrapper.Base().info_logger(f"Searched for {name} steamid: {steam_id}")
