@@ -43,15 +43,26 @@ class Misc(object):
 
             #Get steam id through community ID obtained above
 
+            print(steam_comunity_id)
+
             url = r"https://api.steamid.uk/convert.php"
             steam_id = basewrapper.Base().get_config_vars("steamid")
-            payload = {"api": steam_id, "input": steam_comunity_id, "format": "json"}
+            payload = {"api": steam_id, "player": steam_comunity_id, "format": "json"}
 
             r = requests.get(url, params=payload)
-            steamid = r.json()["converted"]["steamid"]
+            steamid = r.json()["converted"]["steamid64"]
 
-            basewrapper.Base().info_logger(f"Searched for {name} steamid: {steamid}")
-            await self.client.say(f"{ctx.message.author.mention} SteamID for {name}: `{steamid}`")
+            #new code
+
+            url = r"https://api.steamid.uk/request.php"
+            steam_id = basewrapper.Base().get_config_vars("steamid")
+            payload = {"api": steam_id, "player": steamid, "request": 36, "format": "json"}
+
+            r = requests.get(url, params=payload)
+            steamdata = r.json()["profile"]["steamid"]
+
+            basewrapper.Base().info_logger(f"Searched for {name} steamid: {steamdata}")
+            await self.client.say(f"{ctx.message.author.mention} SteamID for {name}: `{steamdata}`")
 
         except Exception as e:
             await self.client.say(f"{ctx.message.author.mention} No account found!")
