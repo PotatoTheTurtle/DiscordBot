@@ -67,7 +67,7 @@ class Misc(object):
                                   f"Steam Profile: https://steamcommunity.com/id/{name} \n"
                                   f"SteamID: {steamdata['profile']['steamid']} \n"
                                   f"SteamID3: {steamdata['profile']['steam3']} \n"
-                                  f"Bans - Vac {self.value_converter_decorator(steamdata['profile_status']['vac'], 'Yes', 'No')} - Trade {self.value_converter_decorator(steamdata['profile_status']['tradeban'], 'Yes', 'No')} - Community Ban {self.value_converter_decorator(steamdata['profile_status']['communityban'], 'Yes', 'No')}```")
+                                  f"Bans: Vac Ban {self.value_converter_decorator(steamdata['profile_status']['vac'], 'Yes', 'No')} - Trade Ban {self.value_converter_decorator(steamdata['profile_status']['tradeban'], 'Yes', 'No')} - Community Ban {self.value_converter_decorator(steamdata['profile_status']['communityban'], 'Yes', 'No')}```")
 
         except Exception as e:
             await self.client.say(f"{ctx.message.author.mention} No account found!")
