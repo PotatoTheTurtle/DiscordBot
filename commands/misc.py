@@ -50,7 +50,7 @@ class Misc(object):
             r = requests.get(url, params=payload)
             steamid = r.json()["converted"]["steamid"]
 
-            basewrapper.Base().info_logger(f"Searched for {name} steamid: {steam_id}")
+            basewrapper.Base().info_logger(f"Searched for {name} steamid: {steamid}")
             await self.client.say(f"{ctx.message.author.mention} SteamID for {name}: `{steamid}`")
 
         except Exception as e:
