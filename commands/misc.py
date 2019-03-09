@@ -76,8 +76,7 @@ class Misc(object):
     @commands.command(pass_context=True)
     async def suggestion(self, ctx: commands.Context, *, suggestion: str):
         try:
-            print(suggestion)
-            basewrapper.Database().write_suggestion(suggestion)
+            basewrapper.Database().write_suggestion(f"{ctx.message.author}: {suggestion}")
             await self.client.say(f"{ctx.message.author.mention} Thanks for the suggestion! :3")
         except Exception as e:
             basewrapper.Base().info_logger(f"Error: {e}")
