@@ -8,6 +8,7 @@ import os
 TOKEN = os.environ.get('TOKEN')
 
 client = commands.Bot(command_prefix="-")
+client.remove_command('help')
 
 client.listcogs = [
     "commands.botclever",
