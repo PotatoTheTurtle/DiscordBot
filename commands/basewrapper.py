@@ -5,13 +5,13 @@ import os
 
 class Base(object):
     def info_logger(self, message):
-        print(f"[{datetime.today()} - INFO] {message}")
+        print(f'[{datetime.today()} - INFO] {message}')
 
     def error_logger(self, message):
-        raise Exception(f"[{datetime.today()} - **ERROR**] {message}")
+        raise Exception(f'[{datetime.today()} - **ERROR**] {message}')
 
     def warning_logger(self, message):
-        print(f"[{datetime.today()} - *WARNING*] {message}")
+        print(f'[{datetime.today()} - *WARNING*] {message}')
 
     def jsondata(self, author, playlistlink):
         data = {f"{author}": {"name": f"{author}", "playlist_link": f"{playlistlink}"}}
@@ -37,6 +37,7 @@ class Database(object):
             self.cursor = self.sql.cursor()
             self.cursor.execute(sql_code)
             self.cursor.commit()
+            Base().info_logger("SQL CONNECTION COMPLETE")
 
         except mysql.connector.Error as error:
             self.sql.rollback()  # rollback if any exception occured
@@ -46,7 +47,6 @@ class Database(object):
             if self.sql.is_connected():
                 self.cursor.close()
                 self.sql.close()
-                Base().info_logger("SQL CONNECTION COMPLETE")
 
 
 class Json(object):
