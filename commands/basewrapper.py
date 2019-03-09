@@ -33,7 +33,9 @@ class Database(object):
 
     def write_suggestion(self, text):
         Base().info_logger("SQL - Write suggestion")
-        sql_code = f'INSERT INTO `suggestion` (`suggestions`) VALUES ({Base().info_logger(text)})'
+        info_logger_text = Base().info_logger(text)
+        print(info_logger_text)
+        sql_code = f'INSERT INTO `suggestion` (`suggestions`) VALUES ({info_logger_text})'
         print(sql_code)
         try:
             self.cursor = self.sql.cursor()
