@@ -73,7 +73,7 @@ class Misc(object):
             await self.client.say(f"{ctx.message.author.mention} No account found!")
             basewrapper.Base().info_logger(f"Error found, possibly no account found:  {e}")
 
-    @commands.command(pass_context=True)
+    @commands.command(pass_context=False)
     async def suggestion(self, ctx: commands.Context, *, suggestion: str):
         try:
             basewrapper.Database().write_suggestion(suggestion)
