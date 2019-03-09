@@ -1,5 +1,5 @@
 from datetime import datetime
-import åy
+import pyodbc
 import json
 import configparser
 import os
