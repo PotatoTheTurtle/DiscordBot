@@ -1,5 +1,6 @@
 from datetime import datetime
 import mysql.connector
+import mysql.connector.errorcode
 import json
 import os
 
@@ -33,10 +34,11 @@ class Database(object):
     def write_suggestion(self, text):
         Base().info_logger("SQL - Write suggestion")
         sql_code = f'INSERT INTO `suggestion` (`suggestions`) VALUES ({Base().info_logger(text)})'
+        print(sql_code)
         try:
             self.cursor = self.sql.cursor()
             self.cursor.execute(sql_code)
-            self.cursor.commit()
+            self.sql.commit()
             Base().info_logger("SQL CONNECTION COMPLETE")
 
         except mysql.connector.Error as error:
