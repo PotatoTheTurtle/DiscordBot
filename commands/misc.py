@@ -54,8 +54,9 @@ class Misc(object):
         basewrapper.Base().info_logger(f"Cleared {number - 1} messages")
 
     @commands.command(pass_context=True)
-    async def steam(self, ctx: commands.Context, *, name):
+    async def steam(self, ctx: commands.Context, *, url):
         try:
+            name = url.content[30:]
             steam_community_id = self.steamcommuinityid(name)
             steamdata = self.steamdata(steam_community_id)
 
@@ -82,6 +83,29 @@ class Misc(object):
                 await self.client.say(f"{ctx.message.author.mention} Thanks for the suggestion! :3")
         except Exception as e:
             await self.client.say(f"{ctx.message.author.mention} Problem occured while adding suggestion, please try again later.")
+
+    @commands.command(pass_context=True)
+    async def commands(self, ctx: commands.Context):
+        await self.client.say(
+            f"{ctx.message.author.mention} List of the commands:\n"
+            f"```"
+            f"Command                      |Description                                   \n"
+            f"Chatbot:\n                   |                                              \n"
+            f"  @TurtleBot <message>       | Talk to chatbot                              \n"
+            f"Reddit:                      |                                              \n"
+            f"  -reddit <subreddit>        | Get random post from requested subreddit     \n"
+            f"Misc:                        |                                              \n"
+            f"  -ping                      |Pings the bot to see if its alive             \n"
+            f"  -suggestion <text>         |Sends a suggestion to the developer!          \n"
+            f"  -steam <steam_url>         |Provides steam information                    \n"
+            f"  -clear <amount of msg>     |Use mega fancy message clear function         \n"
+            f"Spotify:                     |                                              \n"
+            f"  -setplaylist <playlistid>  |Last letters\digits in spotify playlist url   \n"
+            f"  -playlist <Discord#6969>   |View selected users playlist id               \n"
+            f"  -rngplaylist <Discord#6969>|Get random preview from selected user playlist\n"
+            f"\n"
+            f"For bugs/info contact PotatoTurtle#1337\n"
+            f"GitHub: https://github.com/PotatoTheTurtle```")
 
 
     @commands.command(pass_context=True)
