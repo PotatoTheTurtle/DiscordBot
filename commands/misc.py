@@ -73,6 +73,18 @@ class Misc(object):
             basewrapper.Base().info_logger(f"Error found, possibly no account found:  {e}")
 
     @commands.command(pass_context=True)
+    async def suggestion(self, ctx: commands.Context, *, suggestion: str):
+        text_file = basewrapper.Base().get_config_vars("TEXT_FILE")
+        try:
+            with open(text_file, "a") as f:
+                f.write(f"{ctx.message.author.mention} - {suggestion} \n")
+                f.close()
+                await self.client.say(f"{ctx.message.author.mention} Thanks for the suggestion! :3")
+        except Exception as e:
+            await self.client.say(f"{ctx.message.author.mention} Problem occured while adding suggestion, please try again later.")
+
+
+    @commands.command(pass_context=True)
     @commands.has_role("root")
     async def setrole(self, ctx: commands.Context, name, role: str):
         await self.client.add_roles(name, role)
