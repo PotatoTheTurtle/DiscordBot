@@ -32,6 +32,7 @@ class Database(object):
         self.sql = mysql.connector.connect(host=serverip, database=databasename, user=uid, password=password)
 
     def write_suggestion(self, text: str):
+        #I really really really dont like mysql afther this.
         Base().info_logger("SQL - Write suggestion")
         print(text)
         sql_code = "INSERT INTO suggestion VALUES ('%s')" % text
