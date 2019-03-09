@@ -85,7 +85,7 @@ class Misc(object):
             await self.client.say(f"{ctx.message.author.mention} Problem occured while adding suggestion, please try again later.")
 
     @commands.command(pass_context=True)
-    async def commands(self, ctx: commands.Context):
+    async def help(self, ctx: commands.Context):
         await self.client.say(
             f"{ctx.message.author.mention} List of the commands:\n"
             f"```"
