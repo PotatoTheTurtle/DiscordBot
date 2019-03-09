@@ -31,7 +31,7 @@ class Database(object):
         uid = Base().get_config_vars("D_USERNAME")
         self.sql = mysql.connector.connect(host=serverip, database=databasename, user=uid, password=password)
 
-    def write_suggestion(self, text):
+    def write_suggestion(self, text: str):
         Base().info_logger("SQL - Write suggestion")
         print(text)
         sql_code = f'INSERT INTO suggestion (`suggestions`) VALUES ({text})'
