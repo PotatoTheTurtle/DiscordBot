@@ -75,13 +75,11 @@ class Misc(object):
 
     @commands.command(pass_context=True)
     async def suggestion(self, ctx: commands.Context, *, suggestion: str):
-        text_file = basewrapper.Base().get_config_vars("TEXT_FILE")
         try:
-            with open(text_file, "a") as f:
-                f.write(f"{ctx.message.author.mention} - {suggestion} \n")
-                f.close()
-                await self.client.say(f"{ctx.message.author.mention} Thanks for the suggestion! :3")
+            basewrapper.Database().write_suggestion(suggestion)
+            await self.client.say(f"{ctx.message.author.mention} Thanks for the suggestion! :3")
         except Exception as e:
+            basewrapper.Base().info_logger(f"Error: {e}")
             await self.client.say(f"{ctx.message.author.mention} Problem occured while adding suggestion, please try again later.")
 
     @commands.command(pass_context=True)
@@ -92,17 +90,17 @@ class Misc(object):
             f"Command                      |Description                                   \n"
             f"Chatbot:                     |                                              \n"
             f"  @TurtleBot <message>       | Talk to chatbot                              \n"
-            f"\n"
+            f"                             |\n"
             f"Reddit:                      |                                              \n"
             f"  -reddit <subreddit>        | Get random post from requested subreddit     \n"
-            f"\n"
+            f"                             |\n"
             f"Misc:                        |                                              \n"
             f"  -ping                      |Pings the bot to see if its alive             \n"
             f"  -help                      |Lists you the commands                        \n"
             f"  -suggestion <text>         |Sends a suggestion to the developer!          \n"
             f"  -steam <steam_url>         |Provides steam information                    \n"
             f"  -clear <amount of msg>     |Use mega fancy message clear function         \n"
-            f"\n"
+            f"                             |\n"
             f"Spotify:                     |                                              \n"
             f"  -setplaylist <playlistid>  |Last letters\digits in spotify playlist url   \n"
             f"  -playlist <Discord#6969>   |View selected users playlist id               \n"

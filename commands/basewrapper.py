@@ -1,5 +1,5 @@
 from datetime import datetime
-import random
+import åy
 import json
 import configparser
 import os
@@ -26,6 +26,27 @@ class Base(object):
     def get_config_vars(self, var):
         token = os.environ.get(var)
         return token
+
+class Database(object):
+    def __init__(self):
+        serverip = Base().get_config_vars("D_IP")
+        databasename = Base().get_config_vars("D_DATABASE")
+        password = Base().get_config_vars("D_PASSWORD")
+        uid = Base().get_config_vars("D_USERNAME")
+        self.cnxn = pyodbc.connect('Driver={SQL Server};'
+                                f'Server={serverip};'
+                                f'Database={databasename};'
+                                f'PWD={password};'
+                                f'UID={uid};')
+
+    def write_suggestion(self, text):
+        sql_code = f'INSERT INTO `suggestion` (`suggestions`) VALUES ({Base.info_logger(text)});'
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute(sql_code)
+        self.cursor.commit()
+        self.cursor.close()
+        self.cnxn.close()
+
 
 class Json(object):
     def json_load(self, json_file, char):
