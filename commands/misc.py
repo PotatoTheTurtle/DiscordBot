@@ -94,9 +94,8 @@ class Misc(object):
         """
         ip = basewrapper.Base().get_config_vars("GMOD_ADDRESS")
         port = basewrapper.Base().get_config_vars("GMOD_PORT")
-        address = (str(ip), port)
+        address = (ip, int(port))
         info = None
-        print(address)
         try:
             with valve.source.a2s.ServerQuerier(address) as server:
                 info = server.info()
@@ -110,6 +109,10 @@ class Misc(object):
         embed.add_field(name='Map', value=f'{info.values["map"]}', inline=True)
         embed.set_footer(text="Join server! steam://connect/54.37.242.130:27015")
         await self.client.say(embed=embed)
+
+    @commands.command(pass_context=True)
+    async def stats(self, ctx: commands.Context):
+        return
 
     @commands.command(pass_context=True)
     async def help(self, ctx: commands.Context):
