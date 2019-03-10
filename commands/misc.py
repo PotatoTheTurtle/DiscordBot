@@ -96,7 +96,7 @@ class Misc(object):
         port = basewrapper.Base().get_config_vars("GMOD_PORT")
         address = (str(ip), port)
         info = None
-
+        print(address)
         try:
             with valve.source.a2s.ServerQuerier(address) as server:
                 info = server.info()
