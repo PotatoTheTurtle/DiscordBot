@@ -118,8 +118,8 @@ class Misc(object):
     async def stats(self, ctx: commands.Context, player=None):
         if player is None:
             data = basewrapper.Database().get_player_data()
-            name = data[1]
-            money = data[3]
+            name = data[0][1]
+            money = data[0][3]
             await self.client.say(f"{ctx.message.author.mention} Top players: {name} {money}")
         return
 
