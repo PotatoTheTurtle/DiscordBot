@@ -101,10 +101,11 @@ class Misc(object):
         print(info.values)
         print("{player_count}/{max_players} {server_name}".format(**info))
 
-        embed = discord.Embed(title=f'{info.values["server_name"]}', url = r"steam://connect/54.37.242.130:27015")
+        embed = discord.Embed()
         embed.add_field(name='Players', value=f'{info.values["player_count"]} / {info.values["max_players"]}', inline=True)
         embed.add_field(name='Gamemode', value=f'{info.values["game"]}', inline=True)
         embed.add_field(name='Map', value=f'{info.values["map"]}', inline=True)
+        embed.set_footer(text="Join server! steam://connect/54.37.242.130:27015")
         await self.client.say(embed=embed)
 
     @commands.command(pass_context=True)
