@@ -68,7 +68,7 @@ class Database(object):
             cursor.execute(sql_code)
             records = cursor.fetchall()
 
-            array.append((records[0][0],records[0][1],records[0][2],records[0][3]))
+            array.append([records[0][0],records[0][1],records[0][2],records[0][3]])
             print(array)
 
             Base().info_logger("SQL CONNECTION COMPLETE")
