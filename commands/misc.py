@@ -94,7 +94,7 @@ class Misc(object):
         """
         ip = basewrapper.Base().get_config_vars("GMOD_ADDRESS")
         port = basewrapper.Base().get_config_vars("GMOD_PORT")
-        address = (ip, int(port))
+        address = (str(ip), port)
         info = None
 
         try:
