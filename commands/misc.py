@@ -98,18 +98,21 @@ class Misc(object):
         address = (ip, int(port))
         info = None
         try:
-            with valve.source.a2s.ServerQuerier(address) as server:
-                info = server.info()
+            try:
+                with valve.source.a2s.ServerQuerier(address) as server:
+                    info = server.info()
 
-        except valve.source.NoResponseError:
-            print("Master server request timed out!")
+            except valve.source.NoResponseError:
+                print("Master server request timed out!")
 
-        embed = discord.Embed(title=f'{info.values["server_name"]}')
-        embed.add_field(name='Players', value=f'{info.values["player_count"]} / {info.values["max_players"]}', inline=True)
-        embed.add_field(name='Gamemode', value=f'{info.values["game"]}', inline=True)
-        embed.add_field(name='Map', value=f'{info.values["map"]}', inline=True)
-        embed.set_footer(text=f"Join server! {url}")
-        await self.client.say(embed=embed)
+            embed = discord.Embed(title=f'{info.values["server_name"]}')
+            embed.add_field(name='Players', value=f'{info.values["player_count"]} / {info.values["max_players"]}', inline=True)
+            embed.add_field(name='Gamemode', value=f'{info.values["game"]}', inline=True)
+            embed.add_field(name='Map', value=f'{info.values["map"]}', inline=True)
+            embed.set_footer(text=f"Join server! {url}")
+            await self.client.say(embed=embed)
+        except:
+            await self.client.say(f"{ctx.message.author.mention} Server either down or restarting. Please try again later.")
 
     @commands.command(pass_context=True)
     async def stats(self, ctx: commands.Context):
