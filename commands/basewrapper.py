@@ -50,7 +50,7 @@ class Database(object):
                 cursor.close()
                 sql.close()
 
-    def get_player_data(self, player=None):
+    def get_player_data(self):
         Base().info_logger("PREPARING SQL CONNECTION")
         serverip = Base().get_config_vars("D_IP")
         databasename = Base().get_config_vars("D_DATABASE1")
