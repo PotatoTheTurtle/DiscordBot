@@ -89,7 +89,12 @@ class Misc(object):
 
     @commands.command(pass_context=True)
     async def server(self, ctx: commands.Context):
-        address = ('54.37.242.130', 27015)
+        """
+        :return: max 2000 characters for an embedded message (that is kinda gay and fagish)
+        """
+        ip = basewrapper.Base().get_config_vars("GMOD_ADDRESS")
+        port = basewrapper.Base().get_config_vars("GMOD_PORT")
+        address = (ip, int(port))
         info = None
 
         try:
