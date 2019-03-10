@@ -70,7 +70,6 @@ class Database(object):
             for row in records:
                 array.append([row[0],row[1],row[2],row[3]])
 
-            print(array)
             Base().info_logger("SQL CONNECTION COMPLETE")
 
         except mysql.connector.Error as error:
