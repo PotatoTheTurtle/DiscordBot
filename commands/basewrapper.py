@@ -63,14 +63,14 @@ class Database(object):
         sql_code = "SELECT * FROM darkrp_player"
         cursor = sql.cursor()
         array = []
-        print(sql_code)
         try:
             cursor.execute(sql_code)
             records = cursor.fetchall()
 
-            array.append([records[0][0],records[0][1],records[0][2],records[0][3]])
-            print(array)
+            for row in records:
+                array.append([row[0],row[1],row[2],row[3]])
 
+            print(array)
             Base().info_logger("SQL CONNECTION COMPLETE")
 
         except mysql.connector.Error as error:
