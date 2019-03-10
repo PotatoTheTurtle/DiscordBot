@@ -118,6 +118,7 @@ class Misc(object):
     async def stats(self, ctx: commands.Context, *,player=None):
         data = basewrapper.Database().get_player_data()
         array = []
+        print(ctx.message.content)
         if player is None:
             for info in data:
                 name = info[1]
