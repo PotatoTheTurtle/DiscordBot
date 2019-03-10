@@ -116,12 +116,18 @@ class Misc(object):
 
     @commands.command(pass_context=True)
     async def stats(self, ctx: commands.Context, player=None):
+        data = basewrapper.Database().get_player_data()
         if player is None:
-            data = basewrapper.Database().get_player_data()
-            name = data[0][1]
-            money = data[0][3]
-            await self.client.say(f"{ctx.message.author.mention} Top players: {name} {money}")
-        return
+            return
+        try:
+            for info in data:
+                name = info[1]
+                if name == player:
+                    money = info[3]
+                    await self.client.say(f"{ctx.message.author.mention} Top players: {name} {money}")
+        except:
+            await self.client.say(
+                f"{ctx.message.author.mention} Player not found. Use rp name example: 'Ivan Rockford'")
 
     @commands.command(pass_context=True)
     async def help(self, ctx: commands.Context):
