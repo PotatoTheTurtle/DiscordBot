@@ -51,6 +51,31 @@ class Database(object):
                 self.cursor.close()
                 self.sql.close()
 
+    def get_player_data(self, player=None):
+        #I really really really dont like mysql afther this.
+        Base().info_logger("SQL - Get playerdata")
+        sql_code = "SELECT * FROM darkrp_player"
+        array = []
+        print(sql_code)
+        try:
+            self.cursor = self.sql.cursor()
+            self.cursor.execute(sql_code)
+            self.records = self.cursor.fetchall()
+
+            array.append([self.records[0][0],self.records[0][1],self.records[0][2],self.records[0][3]])
+            print(array)
+
+            Base().info_logger("SQL CONNECTION COMPLETE")
+
+        except mysql.connector.Error as error:
+            self.sql.rollback()  # rollback if any exception occured
+            Base().info_logger("Failed inserting record into python_users table {}".format(error))
+
+        finally:
+            if self.sql.is_connected():
+                self.cursor.close()
+                self.sql.close()
+
 
 class Json(object):
     def json_load(self, json_file, char):

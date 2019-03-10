@@ -115,7 +115,9 @@ class Misc(object):
             await self.client.say(f"{ctx.message.author.mention} Server either down or restarting. Please try again later.")
 
     @commands.command(pass_context=True)
-    async def stats(self, ctx: commands.Context):
+    async def stats(self, ctx: commands.Context, player=None):
+        if player is None:
+            basewrapper.Database().get_player_data()
         return
 
     @commands.command(pass_context=True)
