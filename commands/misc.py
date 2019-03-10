@@ -119,6 +119,7 @@ class Misc(object):
         data = basewrapper.Database().get_player_data()
         array = []
         print(ctx.message.content)
+        print(player)
         if player is None:
             for info in data:
                 name = info[1]
