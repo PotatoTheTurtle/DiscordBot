@@ -117,7 +117,15 @@ class Misc(object):
     @commands.command(pass_context=True)
     async def stats(self, ctx: commands.Context, *,player=None):
         data = basewrapper.Database().get_player_data()
+        array = []
         if player is None:
+            for info in data:
+                name = info[1]
+                if name == player:
+                    money = info[3]
+                    array.append(sorted(zip(money, name), reverse=True)[:10])
+                    print(array)
+                    return
             return
         try:
             for info in data:
