@@ -6,3 +6,4 @@ praw==6.1.1
 prawcore==1.0.1
 boto==2.49.0
 mysql-connector-python==8.0.15
+python-valve==0.2.1

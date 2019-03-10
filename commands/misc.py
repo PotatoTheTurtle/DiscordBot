@@ -3,6 +3,10 @@ from commands import basewrapper
 import asyncio
 import requests
 
+import valve.source
+import valve.source.a2s
+import valve.source.master_server
+
 class Misc(object):
     def __init__(self, client: commands.Bot):
         self.client = client
@@ -81,6 +85,22 @@ class Misc(object):
         except Exception as e:
             basewrapper.Base().info_logger(f"Error: {e}")
             await self.client.say(f"{ctx.message.author.mention} Problem occured while adding suggestion, please try again later.")
+
+    @commands.command(pass_context=True)
+    async def server(self, ctx: commands.Context):
+        address = basewrapper.Base().get_config_vars("GMOD_ADDRESS")
+        try:
+            with valve.source.a2s.ServerQuerier(address) as server:
+                self.info = server.info()
+                self.players = server.players()
+
+        except valve.source.NoResponseError:
+            print("Master server request timed out!")
+
+        print("{player_count}/{max_players} {server_name}".format(**self.info))
+        for player in sorted(self.players["players"],key=lambda p: p["score"], reverse=True):
+            print("{score} {name}".format(**player))
+
 
     @commands.command(pass_context=True)
     async def help(self, ctx: commands.Context):
