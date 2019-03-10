@@ -125,8 +125,10 @@ class Misc(object):
                 if name == player:
                     money = info[3]
                     await self.client.say(f"{ctx.message.author.mention} Stats for {name}: Balance {money}")
+                    return
                 else:
-                    raise Exception
+                    continue
+            raise Exception
 
         except:
             await self.client.say(
