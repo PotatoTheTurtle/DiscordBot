@@ -98,10 +98,8 @@ class Misc(object):
 
         except valve.source.NoResponseError:
             print("Master server request timed out!")
-        print(info.values)
-        print("{player_count}/{max_players} {server_name}".format(**info))
 
-        embed = discord.Embed()
+        embed = discord.Embed(title=f'{info.values["server_name"]}')
         embed.add_field(name='Players', value=f'{info.values["player_count"]} / {info.values["max_players"]}', inline=True)
         embed.add_field(name='Gamemode', value=f'{info.values["game"]}', inline=True)
         embed.add_field(name='Map', value=f'{info.values["map"]}', inline=True)
