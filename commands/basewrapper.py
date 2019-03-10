@@ -23,58 +23,64 @@ class Base(object):
         return token
 
 class Database(object):
-    def __init__(self):
+    def write_suggestion(self, text: str):
         Base().info_logger("PREPARING SQL CONNECTION")
         serverip = Base().get_config_vars("D_IP")
         databasename = Base().get_config_vars("D_DATABASE")
         password = Base().get_config_vars("D_PASSWORD")
         uid = Base().get_config_vars("D_USERNAME")
-        self.sql = mysql.connector.connect(host=serverip, database=databasename, user=uid, password=password)
+        sql = mysql.connector.connect(host=serverip, database=databasename, user=uid, password=password)
+        cursor = sql.cursor()
 
-    def write_suggestion(self, text: str):
         #I really really really dont like mysql afther this.
         Base().info_logger("SQL - Write suggestion")
         sql_code = "INSERT INTO suggestion VALUES ('%s')" % text
         print(sql_code)
         try:
-            self.cursor = self.sql.cursor()
-            self.cursor.execute(sql_code)
-            self.sql.commit()
+            cursor.execute(sql_code)
+            sql.commit()
             Base().info_logger("SQL CONNECTION COMPLETE")
 
         except mysql.connector.Error as error:
-            self.sql.rollback()  # rollback if any exception occured
+            sql.rollback()  # rollback if any exception occured
             Base().info_logger("Failed inserting record into python_users table {}".format(error))
 
         finally:
-            if self.sql.is_connected():
-                self.cursor.close()
-                self.sql.close()
+            if sql.is_connected():
+                cursor.close()
+                sql.close()
 
     def get_player_data(self, player=None):
+        Base().info_logger("PREPARING SQL CONNECTION")
+        serverip = Base().get_config_vars("D_IP")
+        databasename = Base().get_config_vars("D_DATABASE1")
+        password = Base().get_config_vars("D_PASSWORD1")
+        uid = Base().get_config_vars("D_USERNAME1")
+        sql = mysql.connector.connect(host=serverip, database=databasename, user=uid, password=password)
+
         #I really really really dont like mysql afther this.
         Base().info_logger("SQL - Get playerdata")
         sql_code = "SELECT * FROM darkrp_player"
+        cursor = sql.cursor()
         array = []
         print(sql_code)
         try:
-            self.cursor = self.sql.cursor()
-            self.cursor.execute(sql_code)
-            self.records = self.cursor.fetchall()
+            cursor.execute(sql_code)
+            records = cursor.fetchall()
 
-            array.append([self.records[0][0],self.records[0][1],self.records[0][2],self.records[0][3]])
+            array.append([records[0][0],records[0][1],records[0][2],records[0][3]])
             print(array)
 
             Base().info_logger("SQL CONNECTION COMPLETE")
 
         except mysql.connector.Error as error:
-            self.sql.rollback()  # rollback if any exception occured
+            sql.rollback()  # rollback if any exception occured
             Base().info_logger("Failed inserting record into python_users table {}".format(error))
 
         finally:
-            if self.sql.is_connected():
-                self.cursor.close()
-                self.sql.close()
+            if sql.is_connected():
+                cursor.close()
+                sql.close()
 
 
 class Json(object):
