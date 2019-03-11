@@ -119,12 +119,13 @@ class Misc(object):
         data = basewrapper.Database().get_player_data()
         array = []
         if player is None:
-            data = dict(data)
             print(data)
             for info in data:
                 info[3] += 1
+                if any(val > 1 for val in data.__iter__()):
+                    array.append([info[1], info[3]])
 
-            top = sorted(array, reverse=True)[:20]
+            top = sorted(array, reverse=True)[:10]
 
             embed = discord.Embed(title="Top 10 Richest people")
             embed.add_field(name="Top 1", value=f'{top[0][0]} - ${top[0][1]}', inline=False)
