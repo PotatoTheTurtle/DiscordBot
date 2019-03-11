@@ -119,8 +119,7 @@ class Misc(object):
         data = basewrapper.Database().get_player_data()
         array = []
         if player is None:
-            setdata = set(data)
-            for info in setdata:
+            for info in data:
                 counter = info.count(info[0])
                 if counter > 1:
                     array.append([info[1], info[3] - 1])
