@@ -117,16 +117,13 @@ class Misc(object):
     @commands.command(pass_context=True)
     async def stats(self, ctx: commands.Context, *,player=None):
         data = basewrapper.Database().get_player_data()
-        array = []
+        top = None
+        totals = {}
         if player is None:
-            for info in data:
-                count = 0
-                counter = data.count(info[count][1])
-                if counter > 1:
-                    array.append([info[1], info[3] - 1])
-                print(counter)
+            for k, v in data:
+                totals[k] = totals.get(k, 0) + v
+                top = sorted(map(list, totals.items()), reverse=True)[:10]
 
-            top = sorted(array, reverse=True)[:10]
             print(top)
 
             embed = discord.Embed(title="Top 10 Richest people")
@@ -144,9 +141,9 @@ class Misc(object):
             return
         try:
             for info in data:
-                name = info[1]
+                name = info[0]
                 if name == player:
-                    money = info[3]
+                    money = info[1]
                     await self.client.say(f"{ctx.message.author.mention} Stats for {name}: Balance ${money}")
                     return
                 else:

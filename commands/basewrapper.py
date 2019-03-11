@@ -68,7 +68,7 @@ class Database(object):
             records = cursor.fetchall()
 
             for row in records:
-                array.append([row[0],row[1],row[2],row[3]])
+                array.append([row[1], row[3]])
 
             Base().info_logger("SQL CONNECTION COMPLETE")
 
