@@ -130,6 +130,7 @@ class Misc(object):
             for i in range(9):
                 money, name = max([sublist[-1] for sublist in top]), max([sublist[0] for sublist in top])
                 array.append([money, name])
+                i += 1
 
             print(array)
 
