@@ -122,7 +122,7 @@ class Misc(object):
         if player is None:
             for k, v in data:
                 totals[k] = totals.get(k, 0) + v
-                top = sorted(map(list, totals.items()), reverse=True)
+                top = sorted(map(list, totals.items()))
 
             print(top)
 
