@@ -118,8 +118,6 @@ class Misc(object):
     async def stats(self, ctx: commands.Context, *,player=None):
         data = basewrapper.Database().get_player_data()
         top = None
-        money = None
-        name = None
         array = []
         totals = {}
         if player is None:
@@ -128,8 +126,9 @@ class Misc(object):
                 top = sorted(map(list, totals.items()))
 
             for i in range(9):
-                money, name = max([sublist[-1] for sublist in top]), max([sublist[i] for sublist in top])
+                money, name = max([sublist[-1] for sublist in top]), max([sublist[0] for sublist in top])
                 array.append([money, name])
+                top.remove([name, money])
                 i += 1
 
             print(array)
