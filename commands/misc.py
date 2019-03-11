@@ -129,6 +129,8 @@ class Misc(object):
                 i = 0
                 print(top)
                 index_int = max([sublist[-1] for sublist in top])
+                if data[1] != index_int:
+                    return
                 index = data.index(index_int)
                 money, name = max([sublist[-1] for sublist in top]), max([sublist[0] for sublist in top])
                 array.append([money, name])
