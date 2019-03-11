@@ -124,6 +124,8 @@ class Misc(object):
                 totals[k] = totals.get(k, 0) + v
                 top = sorted(map(list, totals.items()))
 
+            top = max([sublist[-1] for sublist in top])
+
             print(top)
 
             embed = discord.Embed(title="Top 10 Richest people")
