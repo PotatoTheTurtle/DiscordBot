@@ -126,7 +126,8 @@ class Misc(object):
                 top = sorted(map(list, totals.items()))
 
             for i in range(9):
-                index = max([sublist[-1] for sublist in top]).index()
+                index_int = max([sublist[-1] for sublist in top])
+                index = top.index(index_int)
                 money, name = max([sublist[-1] for sublist in top]), max([sublist[0] for sublist in top])
                 array.append([money, name])
                 print(index)
