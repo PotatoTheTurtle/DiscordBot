@@ -125,6 +125,7 @@ class Misc(object):
                     array.append([info[1], info[3] - 1])
 
             top = sorted(array, reverse=True)[:10]
+            print(top)
 
             embed = discord.Embed(title="Top 10 Richest people")
             embed.add_field(name="Top 1", value=f'{top[0][0]} - ${top[0][1]}', inline=False)
