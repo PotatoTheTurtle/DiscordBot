@@ -120,9 +120,11 @@ class Misc(object):
         array = []
         if player is None:
             for info in data:
-                counter = info.count(info[0])
+                count = 0
+                counter = data.count(info[count][1])
                 if counter > 1:
                     array.append([info[1], info[3] - 1])
+                print(counter)
 
             top = sorted(array, reverse=True)[:10]
             print(top)
