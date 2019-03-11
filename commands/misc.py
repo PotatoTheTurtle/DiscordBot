@@ -119,13 +119,11 @@ class Misc(object):
         data = basewrapper.Database().get_player_data()
         array = []
         if player is None:
-            print(data)
-            for info in data:
-                counter = 0
-                info[3] += 1
-                if any(val > 1 for val in data[counter][3].__iter__()):
-                    array.append([info[1], info[3] -1])
-                counter += 1
+            setdata = set(data)
+            for info in setdata:
+                counter = info.count(info[0])
+                if counter > 1:
+                    array.append([info[1], info[3] - 1])
 
             top = sorted(array, reverse=True)[:10]
 
