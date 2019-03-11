@@ -126,10 +126,11 @@ class Misc(object):
                 top = sorted(map(list, totals.items()))
 
             for i in range(9):
+                index = max([sublist[-1] for sublist in top]), max([sublist[0] for sublist in top]).index()
                 money, name = max([sublist[-1] for sublist in top]), max([sublist[0] for sublist in top])
                 array.append([money, name])
-                print(top)
-                top.remove([name, money])
+                print(index)
+                del top[index]
                 i += 1
 
             print(array)
