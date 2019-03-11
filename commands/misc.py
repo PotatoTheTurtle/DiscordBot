@@ -123,19 +123,19 @@ class Misc(object):
                 name = (info[1], info[3])
                 array.append(name)
 
-            top = sorted(array, reverse=True)[:10]
+            top = sorted(array, reverse=True)[:20]
 
             embed = discord.Embed(title="Top 10 Richest people")
             embed.add_field(name="Top 1", value=f'{top[0][0]} - ${top[0][1]}')
-            embed.add_field(name="Top 2", value=f'{top[1][0]} - ${top[1][1]}')
-            embed.add_field(name="Top 3", value=f'{top[2][0]} - ${top[2][1]}')
-            embed.add_field(name="Top 4", value=f'{top[3][0]} - ${top[3][1]}')
-            embed.add_field(name="Top 5", value=f'{top[4][0]} - ${top[4][1]}')
-            embed.add_field(name="Top 6", value=f'{top[5][0]} - ${top[5][1]}')
-            embed.add_field(name="Top 7", value=f'{top[6][0]} - ${top[6][1]}')
-            embed.add_field(name="Top 8", value=f'{top[7][0]} - ${top[7][1]}')
-            embed.add_field(name="Top 9", value=f'{top[8][0]} - ${top[8][1]}')
-            embed.add_field(name="Top 10", value=f'{top[9][0]} - ${top[9][1]}')
+            embed.add_field(name="Top 2", value=f'{top[2][0]} - ${top[2][1]}')
+            embed.add_field(name="Top 3", value=f'{top[4][0]} - ${top[4][1]}')
+            embed.add_field(name="Top 4", value=f'{top[6][0]} - ${top[6][1]}')
+            embed.add_field(name="Top 5", value=f'{top[8][0]} - ${top[8][1]}')
+            embed.add_field(name="Top 6", value=f'{top[10][0]} - ${top[10][1]}')
+            embed.add_field(name="Top 7", value=f'{top[12][0]} - ${top[12][1]}')
+            embed.add_field(name="Top 8", value=f'{top[14][0]} - ${top[14][1]}')
+            embed.add_field(name="Top 9", value=f'{top[16][0]} - ${top[16][1]}')
+            embed.add_field(name="Top 10", value=f'{top[18][0]} - ${top[18][1]}')
             await self.client.say(embed=embed)
             return
         try:
