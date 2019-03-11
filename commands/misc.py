@@ -125,14 +125,17 @@ class Misc(object):
                 totals[k] = totals.get(k, 0) + v
                 top = sorted(map(list, totals.items()))
 
-            for i in range(9):
+            for data in top:
+                i = 0
                 print(top)
                 index_int = max([sublist[-1] for sublist in top])
-                index = top.index(index_int)
+                index = data.index(index_int)
                 money, name = max([sublist[-1] for sublist in top]), max([sublist[0] for sublist in top])
                 array.append([money, name])
                 print(index)
-                del top[index]
+                data.pop(index_int)
+                if i == 0:
+                    return
                 i += 1
 
             print(array)
