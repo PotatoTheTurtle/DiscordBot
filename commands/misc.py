@@ -118,15 +118,20 @@ class Misc(object):
     async def stats(self, ctx: commands.Context, *,player=None):
         data = basewrapper.Database().get_player_data()
         top = None
+        money = None
+        name = None
+        array = []
         totals = {}
         if player is None:
             for k, v in data:
                 totals[k] = totals.get(k, 0) + v
                 top = sorted(map(list, totals.items()))
 
-            top = max([sublist[-1] for sublist in top])
+            for i in range(9):
+                money, name = max([sublist[-1] for sublist in top]), max([sublist[0] for sublist in top])
+                array.append([money, name])
 
-            print(top)
+            print(array)
 
             embed = discord.Embed(title="Top 10 Richest people")
             embed.add_field(name="Top 1", value=f'{top[0][0]} - ${top[0][1]}', inline=False)
