@@ -171,6 +171,11 @@ class Misc(object):
                 f"{ctx.message.author.mention} Player not found. Use rp name example: 'Ivan Rockford'")
 
     @commands.command(pass_context=True)
+    async def workshop(self, ctx: commands.Context):
+        await self.client.say(f"{ctx.message.author.mention} https://steamcommunity.com/sharedfiles/filedetails/?id=1549043958")
+
+
+    @commands.command(pass_context=True)
     async def help(self, ctx: commands.Context):
         await self.client.say(
             f"{ctx.message.author.mention} List of the commands:\n"
