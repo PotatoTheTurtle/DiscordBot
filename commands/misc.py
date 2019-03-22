@@ -114,6 +114,7 @@ class Misc(object):
             embed.set_footer(text=f"Join server! {url}")
             await self.client.say(embed=embed)
         except:
+            print(Exception)
             await self.client.say(f"{ctx.message.author.mention} Server either down or restarting. Please try again later.")
 
     @commands.command(pass_context=True)
