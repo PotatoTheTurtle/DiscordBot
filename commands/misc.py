@@ -103,7 +103,8 @@ class Misc(object):
                     info = server.info()
                     print(server.players())
 
-            except valve.source.NoResponseError:
+            except valve.source.NoResponseError as e:
+                print(e)
                 print("Master server request timed out!")
 
             embed = discord.Embed(title=f'{info.values["server_name"]}')
