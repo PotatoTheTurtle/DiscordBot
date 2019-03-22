@@ -97,11 +97,15 @@ class Misc(object):
         url = basewrapper.Base().get_config_vars("GMOD_URL")
         address = (ip, int(port))
         info = None
+        players = []
         #try:
         try:
             with valve.source.a2s.ServerQuerier(address) as server:
                 info = server.info()
-                print(server.players())
+                for player in server.players()["players"]:
+                    print(player)
+                    if player["name"]:
+                        players.append(players)
 
         except valve.source.NoResponseError as e:
             print(e)
