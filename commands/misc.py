@@ -103,6 +103,7 @@ class Misc(object):
                     info = server.info()
                     players = server.players()
                     print(players)
+                    print(info)
 
             except valve.source.NoResponseError:
                 print("Master server request timed out!")
