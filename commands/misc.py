@@ -101,9 +101,6 @@ class Misc(object):
             try:
                 with valve.source.a2s.ServerQuerier(address) as server:
                     info = server.info()
-                    players = server.players()
-                    print(players)
-                    print(info)
 
             except valve.source.NoResponseError:
                 print("Master server request timed out!")
