@@ -34,6 +34,7 @@ async def on_message(message):
         return
 
     if "scuffed" in message.content.lower():
+        await client.delete_message(message)
         await client.send_message(message.channel, f"{message.author.mention} Scuffed networks is fake and gay!")
         return
 
