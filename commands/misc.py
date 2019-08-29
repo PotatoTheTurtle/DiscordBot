@@ -219,8 +219,7 @@ class Misc(object):
     @commands.command(pass_context=True)
     @commands.has_role("root")
     async def bug(self, ctx: commands.Context, name, bug: str):
-
-
+        return
 
 def setup(client: commands.Bot):
     client.add_cog(Misc(client))
