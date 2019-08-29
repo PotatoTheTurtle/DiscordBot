@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="159f6d23-3c4b-450a-8fc7-b79411a4ebca" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/misc.py" beforeDir="false" afterPath="$PROJECT_DIR$/commands/misc.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,23 +18,8 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>C</find>
-      <find>cogs</find>
-      <find>commands</find>
-      <find>dumps</find>
-      <find>json</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="430" />
-    <option name="y" value="-12" />
-    <option name="width" value="1400" />
-    <option name="height" value="989" />
   </component>
   <component name="ProjectId" id="1Q67bhtWiRx7drRjugdEYpjlmA2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />

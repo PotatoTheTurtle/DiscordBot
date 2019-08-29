@@ -205,20 +205,25 @@ class Misc(object):
 
     @commands.command(pass_context=True)
     @commands.has_role("root")
-    async def setrole(self, ctx: commands.Context):
-        print("SETROLE")
+    async def setrole(self, ctx: commands.Context, rolename: str):
         member = ctx.message.author
-        role = discord.utils.get(member.server.roles, name="test")
+        role = discord.utils.get(member.server.roles, name=rolename)
         await self.client.add_roles(member, role)
 
     @commands.command(pass_context=True)
-    async def poll(self, ctx: commands.Context, name, amount: int):
-
+    async def poll(self, ctx: commands.Context, title: str, *, questions: str):
+        options = questions.split(',')
+        embed = discord.Embed(title=title)
+        for option in options:
+            embed.add_field(name='Vote:', value=f'{option}')
+        await self.client.say(embed=embed)
         return
 
     @commands.command(pass_context=True)
     @commands.has_role("root")
-    async def bug(self, ctx: commands.Context, name, bug: str):
+    async def bug(self, ctx: commands.Context, ):
+
+
         return
 
 def setup(client: commands.Bot):
