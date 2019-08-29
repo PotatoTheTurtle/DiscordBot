@@ -215,7 +215,9 @@ class Misc(object):
         options = questions.split(',')
         embed = discord.Embed(title=title)
         for option in options:
-            embed.add_field(name=option, inline=False)
+            i = 0
+            i = i + 1
+            embed.add_field(name=f"option {i}:", value=option)
         await self.client.say(embed=embed)
         return
 
