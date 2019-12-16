@@ -48,6 +48,11 @@ async def on_message(message):
         await client.send_message(message.channel, f"{message.author.mention} No advertizing other discord servers! (If you belive this message is an error, then contact PotatoTurtle#1337)")
         return
 
+    if r"discord.gg" in message.content.lower():
+        await client.delete_message(message)
+        await client.send_message(message.channel, f"{message.author.mention} No advertizing other discord servers! (If you belive this message is an error, then contact PotatoTurtle#1337)")
+        return
+
 
     if message.content.startswith(f"<@{client.user.id}>"):
         basewrapper.Base().info_logger(message.content)
